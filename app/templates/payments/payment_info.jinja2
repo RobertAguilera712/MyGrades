@@ -1,0 +1,36 @@
+{% from '_macros.jinja2' import render_dummy_field %}
+
+{{ render_dummy_field ("Colegiatura", student.tuition.price)}}
+
+{% if student.scholarship %}
+
+{{render_dummy_field("Beca", student.scholarship.name)}}
+{% if student.scholarship.type == ScholarshipType.QUANTITY %}
+    {% set discount = student.scholarship.discount  %}
+{% else %}
+    {% set discount = student.scholarship.discount * student.tuition.price / 100 %}
+{% endif %}
+
+{{ render_dummy_field("Descuento", discount) }}
+
+{% endif %}
+
+{{render_dummy_field("Total a pagar", student.tuition.price - discount)}}
+
+
+{# <div class="col-lg-4 col-md-6 col-sm-12 my-3">
+    Colegiatura:
+    {{ student.tuition.price }}
+</div>
+
+{% if student.scholarship %}
+<div class="col-lg-4 col-md-6 col-sm-12 my-3">
+    Beca: {{ student.scholarship.name }}
+    Descuento:
+    {% if student.scholarship.type == ScholarshipType.QUANTITY %}
+    {{ student.scholarship.discount }}
+    {% else %}
+    {{ student.scholarship.discount * student.tuition.price / 100}}
+    {% endif %}
+</div>
+{% endif %} #}

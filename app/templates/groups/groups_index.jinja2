@@ -1,0 +1,62 @@
+{% extends 'owner_dashboard.jinja2' %}
+
+{% block module %}
+
+<h1>Grupos</h1>
+
+<a class="btn btn-primary mb-3"
+   hx-get=" {{ url_for('groups.add_form')}} "
+   hx-push-url="true"
+   hx-replace-url="true"
+   hx-target="#module">
+    <i class="bi bi-plus-circle"></i>
+    Agregar grupo
+</a>
+
+<div class="container-fluid">
+    <div class="table-responsive my-4">
+        <table class="table text-center" id="mainTable">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+
+                <tr>
+                    <td data-label="Actions">
+                        <a href=""
+                           class="btn btn-warning mb-3"
+                           tabindex="-1"
+                           role="button"
+                           aria-disabled="true">Editar</a>
+                        <form action=""
+                              method="post">
+                            <button type="submit"
+                                    class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                    <td data-label="Nombre">
+                        {{ group.name }}
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    
+{% endblock module %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/dataTable.js') }}"></script>
+
+{% endblock scripts %}

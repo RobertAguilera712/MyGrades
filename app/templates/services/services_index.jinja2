@@ -1,0 +1,71 @@
+{% extends 'dashboard.jinja2' %}
+
+{% block module %}
+
+<h1>Servicios</h1>
+
+<a class="btn btn-primary mb-3"
+   hx-get=" {{ url_for('services.add_form')}} "
+   hx-push-url="true"
+   hx-replace-url="true"
+   hx-target="#module">
+    <i class="bi bi-plus-circle"></i>
+    Agregar servicio
+</a>
+
+<div class="container-fluid">
+    <div class="table-responsive my-4">
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Slots</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+
+                <tr>
+                    <td data-label="Actions">
+                        <a href=""
+                           class="btn btn-warning mb-3"
+                           tabindex="-1"
+                           role="button"
+                           aria-disabled="true">Editar</a>
+                        <form action=""
+                              method="post">
+                            <button type="submit"
+                                    class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                    <td data-label="Imagen">
+                        <img src="{{ service.image_url}}">
+                    </td>
+                    <td data-label="Nombre">
+                        {{ service.name }}
+                    </td>
+                    <td data-label="Descripción">
+                        {{ service.description }}
+                    </td>
+                    <td data-label="Precio">
+                        {{ service.price }}
+                    </td>
+                    <td data-label="Slots">
+                        {{ service.slots }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock module %}

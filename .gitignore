@@ -1,0 +1,10 @@
+/env
+/.env
+/app/__pycache__
+/.vscode
+__pycache__
+# app/static/img
+# .flaskenv
+.DS_Store
+# .env_var
+# /.env_var

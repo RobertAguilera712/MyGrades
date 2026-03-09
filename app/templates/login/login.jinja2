@@ -1,0 +1,58 @@
+{% extends 'admin_layout.jinja2' %}
+
+{% from '_macros.jinja2' import render_field%}
+{% from '_macros.jinja2' import render_check%}
+
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100 overflow-auto">
+    <div class="row justify-content-center align-items-center h-100 w-100">
+        <div class="col-lg-6 col-md-10 col-sm-12 d-flex justify-content-center align-items-center py-5">
+            <div class="card d-flex justify-content-center py-3 login-card w-100">
+                <img class="rounded mx-auto d-block mt-4"
+                     height="150px"
+                     src="{{ url_for('static', filename='img/logo.png')}}"
+                     alt="Logo" />
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-5">Login</h5>
+                    <form action=""
+                          method="post">
+
+                        {{ form.hidden_tag() }}
+
+                        {{ render_field(form.email, "mb-2") }}
+                        {{ render_field(form.password, "mb-2") }}
+                        {{ render_check(form.remember) }}
+
+                        <div class="mb-3 d-grid gap-2">
+                            {{ form.submit(class="btn btn-danger d-block mt-5") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{% with messages = get_flashed_messages(with_categories = true) %}
+{% if messages %}
+<script>
+    {% for category, message in messages %}
+    Swal.fire({
+        text: "{{ message }}",
+        icon: "{{ category }}",
+        confirmButtonText: 'OK',
+        buttonsStyling: false,
+
+        customClass: {
+            confirmButton: 'btn btn-primary',
+        }
+    });
+    {% endfor %}
+</script>
+{% endif %}
+{% endwith %}
+{% endblock scripts %}

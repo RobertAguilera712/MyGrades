@@ -1,0 +1,127 @@
+{% macro render_dummy_field(label, value, class="col-lg-4 col-md-6 col-sm-12 my-3") %}
+<div class="{{ class }}">
+    <div class="form-floating">
+        <input class="form-control"
+               id="{{ label }}"
+               name="{{ label }}"
+               placeholder="{{ label }}"
+               required=""
+               type="text"
+               value="{{ value }}"
+               readonly>
+        <label for="{{ label }}">{{ label }}</label>
+    </div>
+</div>
+
+{% endmacro %}
+{% macro render_field(field, class="col-lg-4 col-md-6 col-sm-12 my-3") %}
+<div class="{{ class }}">
+    <div class="form-floating">
+        {% if field.errors %}
+        {{ field(class="form-control is-invalid", placeholder=field.label.text) }}
+        <div class="invalid-feedback">
+            {% for error in field.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ field(class="form-control", placeholder=field.label.text) }}
+        {% endif %}
+        {{ field.label }}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_modal(field, class="col-lg-4 col-md-6 col-sm-12 my-3") %}
+<div class="{{ class }} modal-selection">
+    {{ field }}
+</div>
+{% endmacro %}
+
+{% macro render_check(check) %}
+<div class="form-check">
+    {{ check(class="form-check-input") }}
+    {{ check.label(class="form-check-label") }}
+</div>
+{% endmacro %}
+
+{% macro render_image_field(field, default_image) %}
+<div class="col-lg-4 col-md-6 col-sm-12 my-3  d-flex flex-column align-items-center">
+    <label for="{{ field.id }}">
+        <img class="preview"
+             src="{{ default_image }}">
+    </label>
+    {{ field(class="d-none image") }}
+    {% if field.errors %}
+    <div class="invalid-feedback">
+        {% for error in field.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <br>
+    <label class="form-label"
+           for="{{ field.id }}"><small>Selecciona una imagen</small></label>
+</div>
+{% endmacro %}
+
+{% macro render_file_field(field, default_image) %}
+<div class="col-lg-2 col-md-6 col-sm-12 my-3  d-flex flex-column align-items-center">
+    <label for="{{ field.id }}">
+        <img class="document"
+             src="{{ url_for('static', filename='img/document.png') }}">
+    </label>
+    {{ field(class="d-none document") }}
+    {% if field.errors %}
+    <div class="invalid-feedback">
+        {% for error in field.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <br>
+    <label class="form-label file-name"
+           for="{{ field.id }}">{{ field.label }}</label>
+</div>
+{% endmacro %}
+
+{% macro render_form_field(field, class="col-lg-4 col-md-6 col-sm-12 my-3", render_title=1) %}
+{% if field.type == 'HiddenField' or field.type == "SubmitField" or 'csrf_token' in field.name %}
+{# Skip rendering CSRF token #}
+{% elif field.type == 'BooleanField' %}
+{{ render_check(field) }}
+{% elif field.type == 'FileField' %}
+{% if 'image' in field.name %}
+{{ render_image_field(field, url_for('static', filename='img/preview.png')) }}
+{% else %}
+{{ render_file_field(field, url_for('static', filename='img/document.png')) }}
+{% endif %}
+{% elif field.type in ['FormField', 'FieldList'] %}
+{{ field.hidden_tag() }}
+{% if render_title == 1 and field.title%}
+<p class="text-center fs-4">{{ field.title }}</p>
+{% endif %}
+{% for subfield in field %}
+{{ render_form_field(subfield, class) }}
+{% endfor %}
+{% else %}
+{{ render_field(field, class) }}
+{% endif %}
+{% endmacro %}
+
+
+{% macro render_form(form, class="col-lg-4 col-md-6 col-sm-12 my-3", render_nested_forms=1, render_title=1)  %}
+<div class="row">
+    {% if render_title == 1 %}
+    <p class="text-center fs-3">{{ form.title }}</p>
+    {% endif %}
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+    {% if field.type in ['FormField', 'FieldList'] and   render_nested_forms==0%}
+    {# Skip rendering CSRF token #}
+    {% else %}
+    {{ render_form_field(field, class, render_title) }}
+    {% endif %}
+    {% endfor %}
+</div>
+{% endmacro %}

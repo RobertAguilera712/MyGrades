@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="TODO">
+      <meta name="keywords" content="TODO">
+      <meta name="author" content="Roberto Aguilera">
+
+
+      {# sweet alert css #}
+      <link href="{{ url_for('static', filename='lib/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+
+      {# datatables css #}
+      <link rel="stylesheet" href="{{ url_for('static', filename='lib/datatables/css/bootstrap.css') }}">
+
+      {# Bootstrap CDN #}
+      <link href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+      {# Bootstrap icons #}
+      <link rel="stylesheet" href="{{ url_for('static', filename='lib/bootstrap-icons/bootstrap-icons.min.css') }}">
+
+
+      {# HTMX #}
+      <script src="{{ url_for('static', filename='lib/htmx/htmx.min.js') }}"></script>
+
+      {# Custom CSS #}
+      <link href="{{ url_for('static', filename='css/hamburger.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+
+      <title>{{ title }}</title>
+
+      {% block links %}
+
+      {% endblock links %}
+</head>
+
+<body id="body-pd">
+
+
+      {% block content required%}
+
+      {% endblock content %}
+
+
+      {# Bootstrap JS #}
+      <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+      {# sweet alert js #}
+      <script src="{{ url_for('static', filename='lib/sweetalert2/sweetalert2.min.js') }}"></script>
+
+      {# JQuery #}
+      <script src="{{ url_for('static', filename='lib/jquery/js/jquery.js') }}"></script>
+
+      {# Datatables #}
+      <script src="{{ url_for('static', filename='lib/datatables/js/datatables.js') }}"></script>
+
+      {# Datatables bootstrap #}
+      <script src="{{ url_for('static', filename='lib/datatables/js/bootstrap.js') }}"></script>
+
+      {% block scripts %}
+
+      {% endblock scripts %}
+
+</body>
+
+</html>

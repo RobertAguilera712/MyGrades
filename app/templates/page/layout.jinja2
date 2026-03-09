@@ -1,0 +1,53 @@
+{% from 'navbar.jinja2' import navbar with context %}
+{% from 'footer.jinja2' import footer with context %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+      {# Requiered meta tags #}
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="TODO">
+      <meta name="keywords" content="TODO">
+      <meta name="author" content="Roberto Aguilera">
+
+      {# Bootstrap CDN #}
+      <link href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+      {# Bootstrap icons #}
+      <link rel="stylesheet" href="{{ url_for('static', filename='lib/bootstrap-icons/bootstrap-icons.min.css') }}">
+
+      {# Custom CSS #}
+      <link href="{{ url_for('static', filename='css/hamburger.css') }}" rel="stylesheet">
+      <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+
+      <title>{{ title }}</title>
+
+      {% block links %}
+
+      {% endblock links %}
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+      {{ navbar() }}
+
+      {% block content required %}
+
+      {% endblock content %}
+
+      {{ footer() }}
+
+      {# Bootstrap JS #}
+      <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+      {% block scripts %}
+
+      {% endblock scripts %}
+
+</body>
+
+</html>

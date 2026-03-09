@@ -1,0 +1,18 @@
+{% with messages = get_flashed_messages(with_categories = true) %}
+{% if messages %}
+<script>
+        {% for category, message in messages %}
+        Swal.fire({
+                text: "{{ message }}",
+                icon: "{{ category }}",
+                confirmButtonText: 'OK',
+                buttonsStyling: false,
+
+                customClass: {
+                        confirmButton: 'btn btn-primary',
+                }
+        });
+        {% endfor %}
+</script>
+{% endif %}
+{% endwith %}

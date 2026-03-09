@@ -1,0 +1,59 @@
+{% extends 'owner_dashboard.jinja2' %}
+
+
+{% block module %}
+
+{% from '_macros.jinja2' import render_form %}
+{% from '_macros.jinja2' import render_field %}
+
+<h1 class="text-center mb-3">{{ title }}</h1>
+
+<div class="container">
+    <form action=""
+          enctype="multipart/form-data"
+          method="post">
+        <div class="row">
+            {{ form.hidden_tag() }}
+
+            <div class="col-12 my-3">
+                <div class="form-floating">
+                    {% if form.student.errors %}
+                    {{ form.student(**{'class': 'form-control is-invalid', 'placeholder': 'Alumno', 'hx-get':  url_for("payments.get_details"), 'hx-trigger': 'change',  'hx-target': '#details-container'}) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.student.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.student(**{'class': 'form-control', 'placeholder': 'Alumno', 'hx-get':  url_for("payments.get_details"), 'hx-trigger': 'change',  'hx-target': '#details-container'}) }}
+                    {% endif %}
+                    {{ form.student.label }}
+                </div>
+            </div>
+
+<div class="row gx-3 mx-0" id="details-container"></div>
+
+            <div class="col-5">
+                <div class="row">
+                    {{ form.save(class="btn btn-success") }}
+                </div>
+            </div>
+
+            <div class="col-1"></div>
+
+            <div class="col-5">
+                <div class="row">
+                    <a href="{{ url_for('payments.index') }}"
+                       class="btn btn-danger"
+                       tabindex="-1"
+                       role="button"
+                       aria-disabled="true">Cancelar</a>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+{% endblock module %}

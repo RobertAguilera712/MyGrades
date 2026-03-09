@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    /* --red: #ff5562;
+    --black: #1b1b1b;
+    --dark-gray: #2a2a2a; */
+}
+
+body{
+    font-family: 'Lexend', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Sour Gummy', sans-serif;
+}
+
+
+.navbar-brand{
+    font-family: 'Sour Gummy', sans-serif;
+}
+
+nav .nav-link{
+    border-bottom: 2px solid transparent;
+}
+
+nav .nav-link.active{
+    border-color: #dc3545;
+}
+
+nav .nav-link:hover[href]{
+    border-color: #ee4858;
+}
+
+/* nav .nav-link, nav .navbar-brand, .footer{
+    color: var(--red) !important;
+}
+
+nav .nav-link, .footer{
+    font-weight: 500;
+}
+
+nav .nav-link{
+    border-bottom: 2px solid transparent;
+}
+
+nav .nav-link.active{
+    color: #ddd !important;
+    border-color: #888;
+}
+
+nav .nav-link:hover[href]{
+    color: #fff !important;
+    border-color: #666;
+    background-color: #444;
+}
+
+.project-card{
+    width: 18rem;
+    height: 25rem;
+}
+
+.project-card .card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-control{
+    background-color: #1b1b1b;
+    color: #eee;
+    border-color: #7b7265;
+}
+
+.form-control:focus{
+    background-color: #1b1b1b;
+    color: #eee;
+    border-color: #fe86a7;
+    box-shadow: 0 0 0 .25rem rgba(253,13,84,.25);
+}
+
+#txtComment{
+    height: 120px;
+    resize: none;
+}
+
+.list-group-item{
+    background-color: #dc3545;
+    color: #eee;
+    font-size: 1.2rem;
+}
+
+.nav-link{
+    color: #eee !important;
+}
+
+#social-nav{
+    font-size: 1.5rem;
+} */

@@ -1,0 +1,76 @@
+{% extends 'dashboard.jinja2' %}
+
+
+{% block menu_links %}
+            <a role="button"
+               class="nav_link">
+                <i class="bi bi-cart-fill fs-4"></i>
+
+                <span class="nav_logo-name">My website</span>
+            </a>
+
+            <a role="button"
+               class="nav_link {% if request.path.startswith(url_for('owner.dashboard')) %}active{% endif %}"
+               hx-get="{{ url_for('owner.dashboard')}}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Home</span>
+            </a>
+
+               {# class="nav_link {% if request.path.startswith(url_for('home.index')) %}active{% endif %}" #}
+            <a role="button"
+               hx-get="{{ url_for('groups.index')}}"
+               class="nav_link {% if request.path.startswith(url_for('groups.index')) %}active{% endif %}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Grupos</span>
+            </a>
+
+            <a role="button"
+               hx-get="{{ url_for('tuition.index')}}"
+               class="nav_link {% if request.path.startswith(url_for('tuition.index')) %}active{% endif %}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Colegiaturas</span>
+            </a>
+
+            <a role="button"
+               hx-get="{{ url_for('scholarships.index')}}"
+               class="nav_link {% if request.path.startswith(url_for('scholarships.index')) %}active{% endif %}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Becas</span>
+            </a>
+
+            <a role="button"
+               hx-get="{{ url_for('students.index')}}"
+               class="nav_link {% if request.path.startswith(url_for('students.index')) %}active{% endif %}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Alumnos</span>
+            </a>
+
+            <a role="button"
+               hx-get="{{ url_for('payments.index')}}"
+               class="nav_link {% if request.path.startswith(url_for('payments.index')) %}active{% endif %}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Pagos</span>
+            </a>
+{% endblock menu_links %}
+
+{%block module%}
+Hola
+{%endblock module%}

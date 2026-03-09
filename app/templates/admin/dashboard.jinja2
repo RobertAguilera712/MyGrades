@@ -1,0 +1,92 @@
+{% extends 'admin_layout.jinja2' %}
+
+
+{% block links %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock links %}
+
+{% block content %}
+<header class="header"
+        id="header">
+    <div class="header_toggle">
+        <i class="bi bi-list"
+           id="header-toggle"></i>
+    </div>
+    <div class="dropdown">
+        <button class="btn dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <img src="{{ current_user.image_url }}"
+                 id="fotoEmpleado"
+                 height="35"
+                 alt="user" />
+        </button>
+        <ul class="dropdown-menu"
+            aria-labelledby="dropdownMenuButton1">
+            <li>
+                <a class="dropdown-item"
+                   role="button"
+                   href="{{ url_for('login.logout') }}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</header>
+<div class="l-navbar"
+     id="nav-bar">
+    <nav class="nav">
+        <div class="nav_list">
+
+        {% block menu_links %}
+
+            <a role="button"
+               class="nav_link">
+                <i class="bi bi-cart-fill fs-4"></i>
+
+                <span class="nav_logo-name">My website</span>
+            </a>
+
+            <a role="button"
+               class="nav_link {% if request.path.startswith(url_for('home.index')) %}active{% endif %}"
+               hx-get="{{ url_for('home.index')}}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Home</span>
+            </a>
+
+               {# class="nav_link {% if request.path.startswith(url_for('home.index')) %}active{% endif %}" #}
+            <a role="button"
+               hx-get="{{ url_for('schools.index')}}"
+               class="nav_link {% if request.path.startswith(url_for('schools.index')) %}active{% endif %}"
+               hx-push-url="true"
+               hx-replace-url="true"
+               hx-target="#module">
+                <i class="bi bi-shop nav_icon"></i>
+                <span class="nav_name">Escuelas</span>
+            </a>
+
+        {% endblock menu_links %}
+
+        </div>
+    </nav>
+</div>
+
+<div id="module"
+     class="py-3">
+    {% block module  %}
+    {% endblock module %}
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% include 'alerts.jinja2' %}
+
+{% endblock scripts %}

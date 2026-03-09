@@ -1,0 +1,46 @@
+{% macro navbar() %}
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand"
+           href="/">
+            <img src="{{ url_for('static', filename='img/logo.png') }}"
+                 height="30"
+                 alt="Robert Aguilera's Logo"
+                 class="d-inline-block align-text-center">
+            AguiLangs</a>
+        <button class="navbar-toggler d-flex d-lg-none flex-column justify-content-around collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="toggler-icon top-bar"></span>
+            <span class="toggler-icon middle-bar"></span>
+            <span class="toggler-icon bottom-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse"
+             id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item me-2">
+                    <a class="nav-link active"
+                       href="#">Home</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link"
+                       href="#">Oferta educativa</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link"
+                       href="#">Testimonios</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link"
+                       href="#">Nosotros</a>
+                </li>
+            </ul>
+            <a class="btn btn-danger ms-auto">Inscribirme</a>
+        </div>
+    </div>
+</nav>
+{% endmacro %}
