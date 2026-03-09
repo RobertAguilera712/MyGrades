@@ -15,7 +15,8 @@
 
 <div class="container-fluid">
     <div class="table-responsive my-4">
-        <table class="table text-center" id="mainTable">
+        <table class="table text-center"
+               id="mainTable">
             <thead>
                 <tr>
                     <th>Acciones</th>
@@ -27,11 +28,14 @@
 
                 <tr>
                     <td data-label="Actions">
-                        <a href=""
-                           class="btn btn-warning mb-3"
-                           tabindex="-1"
-                           role="button"
-                           aria-disabled="true">Editar</a>
+                        <a class="btn btn-warning mb-3"
+                           hx-get=" {{ url_for('groups.edit_form', id=group.id)}} "
+                           hx-push-url="true"
+                           hx-replace-url="true"
+                           hx-target="#module"
+                            tabindex="-1"
+                            role="button"
+                            aria-disabled="true">Editar</a>
                         <form action=""
                               method="post">
                             <button type="submit"
@@ -52,7 +56,7 @@
 </div>
 
 
-    
+
 {% endblock module %}
 
 {% block scripts %}
