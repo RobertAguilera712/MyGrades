@@ -45,7 +45,11 @@
                         {{ scholarship.name }}
                     </td>
                     <td data-label="Descuento">
-                        {{ scholarship.discount }}
+                    {% if scholarship.type == ScholarshipType.QUANTITY %}
+                        {{ scholarship.discount | money}}
+                    {% else %}
+                        {{ scholarship.discount }}%
+                    {% endif %}
                     </td>
                 </tr>
 

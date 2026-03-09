@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint
-from .extensions import db, bcrypt, users_imgs, schools_imgs, login_manager
+from .extensions import db, bcrypt, users_imgs, schools_imgs, login_manager, money_format
 from .config import Config
 from .login.routes import login
 from .admin.routes import admin
@@ -21,6 +21,8 @@ import os
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    app.jinja_env.filters['money'] = money_format
 
     db.init_app(app)
     bcrypt.init_app(app)

@@ -46,7 +46,7 @@
                         {{ payment.date }}
                     </td>
                     <td data-label="Total">
-                        {{ payment.total }}
+                        {{ payment.total | money }}
                     </td>
                     <td data-label="Alumno">
                         {{ payment.student.user.person.name}}

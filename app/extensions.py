@@ -21,6 +21,11 @@ login_manager.login_message_category = "info"
 login_manager.login_message = "Por favor inicia sesión para acceder a esta página"
 
 
+def money_format(value):
+    """Format value as USD."""
+    return f"${value:,.2f}"
+
+
 def hash_password(password: str) -> str:
     return bcrypt.generate_password_hash(password).decode("utf-8")
 

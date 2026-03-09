@@ -6,7 +6,7 @@ from app.extensions import (
     users_imgs,
     compress_image,
 )
-from app.models import UserRole, Scholarship, Person, User
+from app.models import UserRole, Scholarship, Person, User, ScholarshipType
 from .forms import SchoolarshipForm
 from flask_login import login_user, current_user, logout_user, login_required
 from jinja2_fragments.flask import render_block
@@ -28,8 +28,8 @@ def index():
     scholarships = Scholarship.query.filter_by(school_id=school_id).all()
     template = "scholarships_index.jinja2"
     if "HX-Request" in request.headers:
-        return render_block(template, "module", scholarships=scholarships)
-    return render_template(template, scholarships=scholarships)
+        return render_block(template, "module", scholarships=scholarships, ScholarshipType=ScholarshipType)
+    return render_template(template, scholarships=scholarships, ScholarshipType=ScholarshipType)
 
 
 @scholarships.route("/add", methods=["GET", "POST"])
