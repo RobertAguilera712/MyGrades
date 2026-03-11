@@ -18,6 +18,7 @@ class GroupsField(SelectField):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.coerce = int
         self.choices = []  # Initialize empty to avoid None
 
     def iter_choices(self):
@@ -45,6 +46,7 @@ class TuitionField(SelectField):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.coerce = int
         self.choices = []  # Initialize empty to avoid None
 
     def iter_choices(self):
@@ -72,6 +74,7 @@ class ScholarshipsField(SelectField):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.coerce = int
         self.choices = []  # Initialize empty to avoid None
 
     def iter_choices(self):
@@ -101,6 +104,7 @@ class StudentsField(SelectField):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.coerce = int
         self.choices = []  # Initialize empty to avoid None
 
     def iter_choices(self):
