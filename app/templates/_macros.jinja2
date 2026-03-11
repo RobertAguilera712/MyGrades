@@ -14,18 +14,37 @@
 </div>
 
 {% endmacro %}
+
+{% macro render_phone_field(field, class="col-lg-4 col-md-6 col-sm-12 my-3") %}
+<div class="{{ class }}">
+    <div class="form-floating">
+        {% if field.errors %}
+            {{ field(**{"class": "form-control is-invalid", "placeholder": field.label.text, "data-mask": "000-000-0000"}) }}
+            <div class="invalid-feedback">
+                {% for error in field.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ field(**{"class": "form-control", "placeholder": field.label.text, "data-mask": "000-000-0000"}) }}
+        {% endif %}
+        {{ field.label }}
+    </div>
+</div>
+{% endmacro %}
+
 {% macro render_field(field, class="col-lg-4 col-md-6 col-sm-12 my-3") %}
 <div class="{{ class }}">
     <div class="form-floating">
         {% if field.errors %}
-        {{ field(class="form-control is-invalid", placeholder=field.label.text) }}
-        <div class="invalid-feedback">
-            {% for error in field.errors %}
-            <span>{{ error }}</span>
-            {% endfor %}
-        </div>
+            {{ field(class="form-control is-invalid", placeholder=field.label.text) }}
+            <div class="invalid-feedback">
+                {% for error in field.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
         {% else %}
-        {{ field(class="form-control", placeholder=field.label.text) }}
+            {{ field(class="form-control", placeholder=field.label.text) }}
         {% endif %}
         {{ field.label }}
     </div>
@@ -86,27 +105,30 @@
 {% endmacro %}
 
 {% macro render_form_field(field, class="col-lg-4 col-md-6 col-sm-12 my-3", render_title=1) %}
-{% if field.type == 'HiddenField' or field.type == "SubmitField" or 'csrf_token' in field.name %}
-{# Skip rendering CSRF token #}
-{% elif field.type == 'BooleanField' %}
-{{ render_check(field) }}
-{% elif field.type == 'FileField' %}
-{% if 'image' in field.name %}
-{{ render_image_field(field, url_for('static', filename='img/preview.png')) }}
-{% else %}
-{{ render_file_field(field, url_for('static', filename='img/document.png')) }}
-{% endif %}
-{% elif field.type in ['FormField', 'FieldList'] %}
-{{ field.hidden_tag() }}
-{% if render_title == 1 and field.title%}
-<p class="text-center fs-4">{{ field.title }}</p>
-{% endif %}
-{% for subfield in field %}
-{{ render_form_field(subfield, class) }}
-{% endfor %}
-{% else %}
-{{ render_field(field, class) }}
-{% endif %}
+    {% if field.type == 'HiddenField' or field.type == "SubmitField" or 'csrf_token' in field.name %}
+    {# Skip rendering CSRF token #}
+    {% elif field.type == 'BooleanField' %}
+        {{ render_check(field) }}
+    {% elif field.type == 'FileField' %}
+        {% if 'image' in field.name %}
+            {{ render_image_field(field, url_for('static', filename='img/preview.png')) }}
+        {% else %}
+            {{ render_file_field(field, url_for('static', filename='img/document.png')) }}
+        {% endif %}
+    {% elif field.type in ['FormField', 'FieldList'] %}
+        {{ field.hidden_tag() }}
+        {% if render_title == 1 and field.title%}
+            <p class="text-center fs-4">{{ field.title }}</p>
+        {% endif %}
+        {% for subfield in field %}
+            {{ render_form_field(subfield, class) }}
+        {% endfor %}
+
+    {% elif field.type == "TelField" %}
+        {{ render_phone_field(field, class) }}
+    {% else %}
+        {{ render_field(field, class) }}
+    {% endif %}
 {% endmacro %}
 
 
